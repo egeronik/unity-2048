@@ -103,14 +103,15 @@ public class NodeObject : MonoBehaviour
             if (combine)
             {
                 target.realNodeObj.value = value * 2;
-                var t = target.realNodeObj.transform.DOPunchScale(new Vector3(.25f, .25f, .25f), 0.15f, 3);
-                this.gameObject.SetActive(false);
-                t.onComplete += () =>
-                {
-                    this.needDestroy = true;
-                    this.target = null; 
-                    this.from = null; 
-                }; 
+                // var t = target.realNodeObj.transform.DOPunchScale(new Vector3(.25f, .25f, .25f), 0.15f, 3);
+                // this.gameObject.SetActive(false);
+                // t.onComplete += () =>
+                // {
+                //      
+                // }; 
+                this.needDestroy = true;
+                this.target = null; 
+                this.from = null;
             }
             else
             {  
@@ -125,12 +126,15 @@ public class NodeObject : MonoBehaviour
     {
         if (target != null)
         {
-            this.name = target.point.ToString(); 
-            var tween = this.blockImage.rectTransform.DOLocalMove(target.position, 0.1f);
-            tween.onComplete += () =>
-            {
-                OnEndMove();  
-            };
+            this.name = target.point.ToString();
+            this.blockImage.rectTransform.localPosition = target.position;
+            OnEndMove();
+            
+            // var tween = this.blockImage.rectTransform.DOLocalMove(target.position, 0.1f);
+            // tween.onComplete += () =>
+            // {
+            //     OnEndMove();  
+            // };
         }
         
     }
